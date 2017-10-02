@@ -19,13 +19,16 @@ public class ItemsActivity extends AppCompatActivity {
 
     private String[] items = new String[] {"Plaid Oblong Scarf", "Infinity Scarf", "Scarf w/Fringes", "Border Infinity Scarf", "Cowl Scarf with Fur", "Fancy Shawl Scarf"};
 
+    private String[] availabilities = new String[] {"ONLINE_ONLY", "STORE_ONLY", "ONLINE_ONLY", "ONLINE_AND_STORE", "ONLINE_AND_STORE", "ONLINE_ONLY"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        ShoppingListArrayAdapter adapter = new ShoppingListArrayAdapter(this, android.R.layout.simple_list_item_1, items, availabilities);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
