@@ -25,6 +25,17 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/itemEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/findItemsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/white"
+        android:hint="Enter Item"
+        android:padding="5dp" />
+
     <Button
         android:id="@+id/findItemsButton"
         android:layout_width="match_parent"
