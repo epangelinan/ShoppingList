@@ -3,9 +3,12 @@ package com.epicodus.shoppinglist;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItemsActivity extends AppCompatActivity {
     private TextView mItemTextView;
@@ -22,6 +25,14 @@ public class ItemsActivity extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = ((TextView)view).getText().toString();
+                Toast.makeText(ItemsActivity.this, item, Toast.LENGTH_LONG).show();
+            }
+        });
 
         Intent intent = getIntent();
         String item = intent.getStringExtra("item");
