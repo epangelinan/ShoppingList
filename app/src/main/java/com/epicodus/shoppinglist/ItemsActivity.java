@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,8 +26,9 @@ public class ItemsActivity extends AppCompatActivity {
     @Bind(R.id.itemTextView) TextView mItemTextView;
     @Bind(R.id.listView) ListView mListView;
 
-    private String[] items = new String[] {"Plaid Oblong Scarf", "Infinity Scarf", "Scarf w/Fringes", "Border Infinity Scarf", "Cowl Scarf with Fur", "Fancy Shawl Scarf"};
+    public ArrayList<Item> mItems = new ArrayList<>();
 
+    private String[] items = new String[] {"Plaid Oblong Scarf", "Infinity Scarf", "Scarf w/Fringes", "Border Infinity Scarf", "Cowl Scarf with Fur", "Fancy Shawl Scarf"};
     private String[] availabilities = new String[] {"ONLINE_ONLY", "STORE_ONLY", "ONLINE_ONLY", "ONLINE_AND_STORE", "ONLINE_AND_STORE", "ONLINE_ONLY"};
 
 
@@ -67,7 +69,10 @@ public class ItemsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if (response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        mItems = walmartService.processResults(response);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
