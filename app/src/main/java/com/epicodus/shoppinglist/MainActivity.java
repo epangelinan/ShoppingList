@@ -9,23 +9,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
-    private Button mFindItemsButton;
-    private EditText mItemEditText;
-    private TextView mAppNameTextView;
+    @Bind(R.id.findItemsButton) Button mFindItemsButton;
+    @Bind(R.id.itemEditText) EditText mItemEditText;
+    @Bind(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mAppNameTextView = (TextView) findViewById(R.id.appNameTextView);
         Typeface dancingScriptRegular = Typeface.createFromAsset(getAssets(),"fonts/dancingscriptregular.otf");
         mAppNameTextView.setTypeface(dancingScriptRegular);
-
-        mItemEditText = (EditText) findViewById(R.id.itemEditText);
-        mFindItemsButton = (Button) findViewById(R.id.findItemsButton);
 
         mFindItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override

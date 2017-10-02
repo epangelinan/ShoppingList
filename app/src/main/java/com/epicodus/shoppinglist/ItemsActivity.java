@@ -10,18 +10,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ItemsActivity extends AppCompatActivity {
-    private TextView mItemTextView;
-    private ListView mListView;
+    @Bind(R.id.itemTextView) TextView mItemTextView;
+    @Bind(R.id.listView) ListView mListView;
+
     private String[] items = new String[] {"Plaid Oblong Scarf", "Infinity Scarf", "Scarf w/Fringes", "Border Infinity Scarf", "Cowl Scarf with Fur", "Fancy Shawl Scarf"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
-
-        mListView  = (ListView) findViewById(R.id.listView);
-        mItemTextView = (TextView) findViewById(R.id.itemTextView);
+        ButterKnife.bind(this);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         mListView.setAdapter(adapter);
