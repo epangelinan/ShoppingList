@@ -23,13 +23,10 @@ import okhttp3.Response;
 public class ItemsActivity extends AppCompatActivity {
     public static final String TAG = ItemsActivity.class.getSimpleName();
 
-    @Bind(R.id.itemTextView) TextView mItemTextView;
+    @Bind(R.id.searchItemTextView) TextView mSearchItemTextView;
     @Bind(R.id.listView) ListView mListView;
 
     public ArrayList<Item> mItems = new ArrayList<>();
-
-    private String[] items = new String[] {"Plaid Oblong Scarf", "Infinity Scarf", "Scarf w/Fringes", "Border Infinity Scarf", "Cowl Scarf with Fur", "Fancy Shawl Scarf"};
-    private String[] availabilities = new String[] {"ONLINE_ONLY", "STORE_ONLY", "ONLINE_ONLY", "ONLINE_AND_STORE", "ONLINE_AND_STORE", "ONLINE_ONLY"};
 
 
     @Override
@@ -38,27 +35,18 @@ public class ItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_items);
         ButterKnife.bind(this);
 
-        ShoppingListArrayAdapter adapter = new ShoppingListArrayAdapter(this, android.R.layout.simple_list_item_1, items, availabilities);
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = ((TextView)view).getText().toString();
-                Toast.makeText(ItemsActivity.this, item, Toast.LENGTH_LONG).show();
-            }
-        });
-
         Intent intent = getIntent();
-        String item = intent.getStringExtra("item");
-        mItemTextView.setText("Here are all the items: " + item);
+        String searchItem = intent.getStringExtra("searchItem");
 
-        getItems(item);
+        mSearchItemTextView.setText("Here are all the items: " + searchItem);
+
+        getItems(searchItem);
     }
 
-    private void getItems(String item) {
+    private void getItems(String searchItem) {
         final WalmartService walmartService = new WalmartService();
-        walmartService.findItems(item, new Callback() {
+
+        walmartService.findItems(searchItem, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -66,18 +54,33 @@ public class ItemsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, jsonData);
-                        mItems = walmartService.processResults(response);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            public void onResponse(Call call, Response response) {
+                mItems = walmartService.processResults(response);
+                ItemsActivity.this.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        String[] itemNames = new String[mItems.size()];
+                        for (int i = 0; i < itemNames.length; i++) {
+                            itemNames[i] = mItems.get(i).getName();
+                        }
 
-        });
+                        ArrayAdapter adapter = new ArrayAdapter(ItemsActivity.this, android.R.layout.simple_list_item_1, itemNames);
+                            mListView.setAdapter(adapter);
+                            for (Item item: mItems) {
+                                Log.d(TAG, "Name: " + item.getName());
+                                Log.d(TAG, "ItemId: " + item.getItemId());
+                                Log.d(TAG, "SalePrice: " + Double.toString(item.getSalePrice()));
+                                Log.d(TAG, "LongDescription: " + item.getLongDescription());
+                                Log.d(TAG, "MediumImage: " + item.getMediumImage());
+                                Log.d(TAG, "Stock: " + item.getStock());
+                                Log.d(TAG, "OfferType: " + item.getOfferType());
+                            }
+                        }
+                    });
+
+                }
+
+            });
+        }
+
     }
-}

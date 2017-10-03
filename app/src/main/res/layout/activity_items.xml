@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Searched Item"
-        android:id="@+id/itemTextView"
+        android:id="@+id/searchItemTextView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp" />
@@ -20,7 +20,7 @@
         android:id="@+id/listView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/itemTextView"
+        android:layout_below="@+id/searchItemTextView"
  />
 
 

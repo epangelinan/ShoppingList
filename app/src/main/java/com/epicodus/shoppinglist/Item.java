@@ -7,7 +7,6 @@ public class Item {
     private double mSalePrice;
     private String mLongDescription;
     private String mMediumImage;
-    private double mCustomerRating;
     private String mStock;
     private String mOfferType;
 
@@ -16,7 +15,6 @@ public class Item {
                 double salePrice,
                 String longDescription,
                 String mediumImage,
-                double customerRating,
                 String stock,
                 String offerType) {
 
@@ -25,7 +23,6 @@ public class Item {
         this.mSalePrice = salePrice;
         this.mLongDescription = longDescription;
         this.mMediumImage = mediumImage;
-        this.mCustomerRating = customerRating;
         this.mStock = stock;
         this.mOfferType = offerType;
     }
@@ -48,10 +45,6 @@ public class Item {
 
     public String getMediumImage() {
         return mMediumImage;
-    }
-
-    public double getCustomerRating() {
-        return mCustomerRating;
     }
 
     public String getStock() {

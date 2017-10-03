@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
-    @Bind(R.id.itemEditText) EditText mItemEditText;
+    @Bind(R.id.searchItemEditText) EditText mSearchItemEditText;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == mFindItemsButton) {
-            String item = mItemEditText.getText().toString();
+            String searchItem = mSearchItemEditText.getText().toString();
             Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
-            intent.putExtra("item", item);
+            intent.putExtra("searchItem", searchItem);
             startActivity(intent);
         }
     }

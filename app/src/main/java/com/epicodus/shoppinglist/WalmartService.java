@@ -3,6 +3,9 @@ package com.epicodus.shoppinglist;
 
 import android.util.Log;
 
+
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,14 +22,14 @@ import okhttp3.Response;
 
 public class WalmartService {
 
-    public static void findItems(String item, Callback callback) {
+    public static void findItems(String searchItem, Callback callback) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WALMART_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.WALMART_ITEM_QUERY_PARAMETER, item);
-        urlBuilder.addQueryParameter("format", "json");
-        urlBuilder.addQueryParameter("apiKey", Constants.WALMART_APP_KEY);
+        urlBuilder.addQueryParameter("query", searchItem);
+        urlBuilder.addQueryParameter(Constants.WALMART_FORMAT_KEY, Constants.WALMART_FORMAT_VALUE);
+        urlBuilder.addQueryParameter("apiKey", Constants.WALMART_API_KEY);
 
         String url = urlBuilder.build().toString();
 
@@ -51,6 +54,7 @@ public class WalmartService {
                 JSONArray itemsJSON = walmartJSON.getJSONArray("items");
                 for (int i = 0; i < itemsJSON.length(); i++) {
                     JSONObject itemJSON = itemsJSON.getJSONObject(i);
+
                     String name = itemJSON.getString("name");
 
                     String itemId = itemJSON.getString("itemId");
@@ -61,13 +65,11 @@ public class WalmartService {
 
                     String mediumImage = itemJSON.getString("mediumImage");
 
-                    double customerRating = itemJSON.getDouble("customerRating");
-
                     String stock = itemJSON.getString("stock");
 
                     String offerType = itemJSON.getString("offerType");
 
-                    Item item = new Item(name, itemId, salePrice, longDescription, mediumImage, customerRating, stock, offerType);
+                    Item item = new Item(name, itemId, salePrice, longDescription, mediumImage, stock, offerType);
                     items.add(item);
                 }
             }
