@@ -1,19 +1,23 @@
 package com.epicodus.shoppinglist.models;
 
+import org.parceler.Parcel;
 
+@Parcel
 public class Item {
     private String mName;
     private String mItemId;
     private double mSalePrice;
-    private String mLongDescription;
+    private String mShortDescription;
     private String mMediumImage;
     private String mStock;
     private String mOfferType;
 
+    public Item() {}
+
     public Item(String name,
                 String itemId,
                 double salePrice,
-                String longDescription,
+                String shortDescription,
                 String mediumImage,
                 String stock,
                 String offerType) {
@@ -21,7 +25,7 @@ public class Item {
         this.mName = name;
         this.mItemId = itemId;
         this.mSalePrice = salePrice;
-        this.mLongDescription = longDescription;
+        this.mShortDescription = shortDescription;
         this.mMediumImage = mediumImage;
         this.mStock = stock;
         this.mOfferType = offerType;
@@ -39,8 +43,8 @@ public class Item {
         return mSalePrice;
     }
 
-    public String getLongDescription() {
-        return mLongDescription;
+    public String getShortDescription() {
+        return mShortDescription;
     }
 
     public String getMediumImage() {
