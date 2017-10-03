@@ -1,10 +1,11 @@
-package com.epicodus.shoppinglist;
+package com.epicodus.shoppinglist.services;
 
 
 import android.util.Log;
 
 
-
+import com.epicodus.shoppinglist.Constants;
+import com.epicodus.shoppinglist.models.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
