@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.epicodus.shoppinglist">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,12 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ItemsActivity">
+        <activity android:name=".ui.ItemListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.shoppinglist.ui.MainActivity">
-            </meta-data>
+                android:value="com.epicodus.shoppinglist.ui.MainActivity"></meta-data>
         </activity>
+        <activity android:name=".ui.ItemDetailActivity"></activity>
     </application>
 
 </manifest>

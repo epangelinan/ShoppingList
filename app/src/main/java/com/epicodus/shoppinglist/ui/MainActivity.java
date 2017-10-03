@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == mFindItemsButton) {
             String searchItem = mSearchItemEditText.getText().toString();
-            Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
+            Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
             intent.putExtra("searchItem", searchItem);
             startActivity(intent);
         }

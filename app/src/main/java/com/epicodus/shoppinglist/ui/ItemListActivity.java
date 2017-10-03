@@ -5,10 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.adapters.ItemListAdapter;
@@ -24,8 +20,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ItemsActivity extends AppCompatActivity {
-    public static final String TAG = ItemsActivity.class.getSimpleName();
+public class ItemListActivity extends AppCompatActivity {
+    public static final String TAG = ItemListActivity.class.getSimpleName();
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private ItemListAdapter mAdapter;
@@ -59,14 +55,14 @@ public class ItemsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 mItems = walmartService.processResults(response);
 
-                ItemsActivity.this.runOnUiThread(new Runnable(){
+                ItemListActivity.this.runOnUiThread(new Runnable(){
 
                     @Override
                     public void run() {
                         mAdapter = new ItemListAdapter(getApplicationContext(), mItems);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(ItemsActivity.this);
+                                new LinearLayoutManager(ItemListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                         }
