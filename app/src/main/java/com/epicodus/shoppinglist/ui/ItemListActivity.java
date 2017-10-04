@@ -1,11 +1,15 @@
 package com.epicodus.shoppinglist.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.epicodus.shoppinglist.Constants;
 import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.adapters.ItemListAdapter;
 import com.epicodus.shoppinglist.models.Item;
@@ -21,6 +25,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ItemListActivity extends AppCompatActivity {
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
     public static final String TAG = ItemListActivity.class.getSimpleName();
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -39,6 +45,11 @@ public class ItemListActivity extends AppCompatActivity {
         String searchItem = intent.getStringExtra("searchItem");
 
         getItems(searchItem);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_SEARCH_ITEM_KEY, null);
+        if (mRecentAddress != null) {
+            getItems(mRecentAddress);
+        }
     }
 
     private void getItems(String searchItem) {

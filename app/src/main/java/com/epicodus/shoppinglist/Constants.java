@@ -7,4 +7,5 @@ public class Constants {
     public static final String WALMART_ITEM_QUERY_PARAMETER = "query";
     public static final String WALMART_FORMAT_KEY = "format";
     public static final String WALMART_FORMAT_VALUE = "json";
+    public static final String PREFERENCES_SEARCH_ITEM_KEY ="searchItem";
 }
