@@ -64,6 +64,18 @@ public class WalmartService {
 
                     String longDescription = itemJSON.getString("longDescription");
 
+                    longDescription = longDescription.replaceAll("&lt;", "");
+                    longDescription = longDescription.replaceAll("&gt;", "");
+                    longDescription = longDescription.replaceAll("lili", "");
+                    longDescription = longDescription.replaceAll("bulli", "");
+                    longDescription = longDescription.replaceAll("br&gt;", "");
+                    longDescription = longDescription.replaceAll("b&gt;", "");
+                    longDescription = longDescription.replaceAll("ul&gt;", "");
+                    longDescription = longDescription.replaceAll("li&gt;", "");
+                    longDescription = longDescription.replaceAll("brb", "");
+                    longDescription = longDescription.replaceAll("bbr", "");
+                    longDescription = longDescription.replaceAll("/li/ul", "");
+
                     String mediumImage = itemJSON.getString("mediumImage");
 
                     String stock = itemJSON.getString("stock");
