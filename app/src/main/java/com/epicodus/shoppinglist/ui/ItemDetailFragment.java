@@ -1,6 +1,8 @@
 package com.epicodus.shoppinglist.ui;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ItemDetailFragment extends Fragment {
+public class ItemDetailFragment extends Fragment implements View.OnClickListener{
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
 
@@ -33,6 +35,7 @@ public class ItemDetailFragment extends Fragment {
     @Bind(R.id.itemIdTextView) TextView mItemIdLabel;
     @Bind(R.id.shortDescriptionTextView) TextView mShortDescriptionLabel;
     @Bind(R.id.saveItemButton) TextView mSaveItemButton;
+    @Bind(R.id.addToCartTextView) TextView mAddToCartLabel;
 
     private Item mItem;
 
@@ -68,6 +71,17 @@ public class ItemDetailFragment extends Fragment {
         mItemIdLabel.setText("Item ID:" + mItem.getItemId());
         mShortDescriptionLabel.setText(mItem.getShortDescription());
 
+        mAddToCartLabel.setOnClickListener(this);
+
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mAddToCartLabel) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mItem.getAddToCartUrl()));
+            startActivity(webIntent);
+        }
     }
 }

@@ -82,7 +82,9 @@ public class WalmartService {
 
                     String offerType = itemJSON.getString("offerType");
 
-                    Item item = new Item(name, itemId, salePrice, longDescription, mediumImage, stock, offerType);
+                    String addToCartUrl = itemJSON.getString("addToCartUrl");
+
+                    Item item = new Item(name, itemId, salePrice, longDescription, mediumImage, stock, offerType, addToCartUrl);
                     items.add(item);
                 }
             }

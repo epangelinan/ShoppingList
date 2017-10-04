@@ -92,6 +92,19 @@
                 android:paddingTop="20dp">
 
                 <TextView
+                    android:id="@+id/addToCartTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/ic_add_shopping_cart_white_24dp"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="Add to Cart"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/itemIdTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

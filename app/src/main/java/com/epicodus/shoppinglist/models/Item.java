@@ -11,6 +11,7 @@ public class Item {
     private String mMediumImage;
     private String mStock;
     private String mOfferType;
+    private String mAddToCartUrl;
 
     public Item() {}
 
@@ -20,7 +21,8 @@ public class Item {
                 String shortDescription,
                 String mediumImage,
                 String stock,
-                String offerType) {
+                String offerType,
+                String addToCartUrl) {
 
         this.mName = name;
         this.mItemId = itemId;
@@ -29,6 +31,7 @@ public class Item {
         this.mMediumImage = mediumImage;
         this.mStock = stock;
         this.mOfferType = offerType;
+        this.mAddToCartUrl = addToCartUrl;
     }
 
     public String getName() {
@@ -57,5 +60,9 @@ public class Item {
 
     public String getOfferType() {
         return mOfferType;
+    }
+
+    public String getAddToCartUrl() {
+        return mAddToCartUrl;
     }
 }
