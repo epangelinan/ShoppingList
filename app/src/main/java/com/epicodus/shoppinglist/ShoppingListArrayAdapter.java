@@ -8,6 +8,7 @@ public class ShoppingListArrayAdapter extends ArrayAdapter {
     private String[] mItems;
     private String[] mAvailabilities;
 
+
     public ShoppingListArrayAdapter(Context mContext, int resource, String[] mItems, String[] mAvailabilities) {
         super(mContext, resource);
         this.mContext = mContext;
