@@ -25,13 +25,14 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ItemListActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentAddress;
+
     public static final String TAG = ItemListActivity.class.getSimpleName();
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-    private ItemListAdapter mAdapter;
 
+    private ItemListAdapter mAdapter;
     public ArrayList<Item> mItems = new ArrayList<>();
 
 
@@ -45,11 +46,12 @@ public class ItemListActivity extends AppCompatActivity {
         String searchItem = intent.getStringExtra("searchItem");
 
         getItems(searchItem);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_SEARCH_ITEM_KEY, null);
-        if (mRecentAddress != null) {
-            getItems(mRecentAddress);
-        }
+
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_SEARCH_ITEM_KEY, null);
+//        if (mRecentAddress != null) {
+//            getItems(mRecentAddress);
+//        }
     }
 
     private void getItems(String searchItem) {

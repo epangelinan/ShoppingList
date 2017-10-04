@@ -8,4 +8,5 @@ public class Constants {
     public static final String WALMART_FORMAT_KEY = "format";
     public static final String WALMART_FORMAT_VALUE = "json";
     public static final String PREFERENCES_SEARCH_ITEM_KEY ="searchItem";
+    public static final String FIREBASE_CHILD_SEARCHED_ITEM = "searchedItem";
 }

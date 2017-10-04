@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.epicodus.shoppinglist.Constants;
 import com.epicodus.shoppinglist.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,8 +22,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+ //   private SharedPreferences mSharedPreferences;
+ //   private SharedPreferences.Editor mEditor;
+
+    private DatabaseReference mSearchedItemReference;
 
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
     @Bind(R.id.searchItemEditText) EditText mSearchItemEditText;
@@ -29,12 +33,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mSearchedItemReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SEARCHED_ITEM);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+  //      mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+  //      mEditor = mSharedPreferences.edit();
 
         Typeface dancingScriptRegular = Typeface.createFromAsset(getAssets(), "fonts/dancingscriptregular.otf");
         mAppNameTextView.setTypeface(dancingScriptRegular);
@@ -46,16 +56,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == mFindItemsButton) {
             String searchItem = mSearchItemEditText.getText().toString();
-            if(!(searchItem).equals("")) {
-                addToSharedPreferences(searchItem);
-            }
+
+            saveSearchItemToFirebase(searchItem);
+
+ //           if(!(searchItem).equals("")) {
+ //               addToSharedPreferences(searchItem);
+ //           }
+
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
-            //intent.putExtra("searchItem", searchItem);
+            intent.putExtra("searchItem", searchItem);
             startActivity(intent);
         }
     }
 
-    private void addToSharedPreferences(String searchItem) {
-        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
+    public void saveSearchItemToFirebase(String searchItem) {
+        mSearchedItemReference.push().setValue(searchItem);
     }
+
+
+//    private void addToSharedPreferences(String searchItem) {
+//        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
+//    }
 }
