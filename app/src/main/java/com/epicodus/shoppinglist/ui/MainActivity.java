@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 
 import com.epicodus.shoppinglist.Constants;
 import com.epicodus.shoppinglist.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  //   private SharedPreferences.Editor mEditor;
 
     private DatabaseReference mSearchedItemReference;
+    private ValueEventListener mSearchedItemReferenceListener;
 
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
     @Bind(R.id.searchItemEditText) EditText mSearchItemEditText;
@@ -37,7 +42,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedItemReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_ITEM);
+                .child(Constants.FIREBASE_CHILD_SEARCHED_ITEM); //pinpoint location node
+
+        mSearchedItemReferenceListener = mSearchedItemReference.addValueEventListener(new ValueEventListener() { //attach listener
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
+                for (DataSnapshot searchItemSnapshot : dataSnapshot.getChildren()) {
+                    String searchItem = searchItemSnapshot.getValue().toString();
+                    Log.d("Search items updated", "item: " + searchItem); //log
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
+
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -73,6 +94,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedItemReference.push().setValue(searchItem);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedItemReference.removeEventListener(mSearchedItemReferenceListener);
+    }
 
 //    private void addToSharedPreferences(String searchItem) {
 //        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
