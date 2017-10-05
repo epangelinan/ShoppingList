@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
     @Bind(R.id.searchItemEditText) EditText mSearchItemEditText;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
+    @Bind(R.id.savedItemsButton) Button mSavedItemsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAppNameTextView.setTypeface(dancingScriptRegular);
 
         mFindItemsButton.setOnClickListener(this);
+        mSavedItemsButton.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
             intent.putExtra("searchItem", searchItem);
+            startActivity(intent);
+        }
+        if (v == mSavedItemsButton) {
+            Intent intent = new Intent(MainActivity.this, SavedItemListActivity.class);
             startActivity(intent);
         }
     }
