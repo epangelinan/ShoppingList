@@ -4,14 +4,14 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Item {
-    private String mName;
-    private String mItemId;
-    private double mSalePrice;
-    private String mShortDescription;
-    private String mMediumImage;
-    private String mStock;
-    private String mOfferType;
-    private String mAddToCartUrl;
+    private String name;
+    private String itemId;
+    private double salePrice;
+    private String shortDescription;
+    private String mediumImage;
+    private String stock;
+    private String offerType;
+    private String addToCartUrl;
 
     public Item() {}
 
@@ -24,45 +24,45 @@ public class Item {
                 String offerType,
                 String addToCartUrl) {
 
-        this.mName = name;
-        this.mItemId = itemId;
-        this.mSalePrice = salePrice;
-        this.mShortDescription = shortDescription;
-        this.mMediumImage = mediumImage;
-        this.mStock = stock;
-        this.mOfferType = offerType;
-        this.mAddToCartUrl = addToCartUrl;
+        this.name = name;
+        this.itemId = itemId;
+        this.salePrice = salePrice;
+        this.shortDescription = shortDescription;
+        this.mediumImage = mediumImage;
+        this.stock = stock;
+        this.offerType = offerType;
+        this.addToCartUrl = addToCartUrl;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public String getItemId() {
-        return mItemId;
+        return itemId;
     }
 
     public double getSalePrice() {
-        return mSalePrice;
+        return salePrice;
     }
 
     public String getShortDescription() {
-        return mShortDescription;
+        return shortDescription;
     }
 
     public String getMediumImage() {
-        return mMediumImage;
+        return mediumImage;
     }
 
     public String getStock() {
-        return mStock;
+        return stock;
     }
 
     public String getOfferType() {
-        return mOfferType;
+        return offerType;
     }
 
     public String getAddToCartUrl() {
-        return mAddToCartUrl;
+        return addToCartUrl;
     }
 }

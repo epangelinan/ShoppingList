@@ -10,9 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.epicodus.shoppinglist.Constants;
 import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.models.Item;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -72,6 +76,7 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
         mShortDescriptionLabel.setText(mItem.getShortDescription());
 
         mAddToCartLabel.setOnClickListener(this);
+        mSaveItemButton.setOnClickListener(this);
 
         return view;
     }
@@ -82,6 +87,13 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
             Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mItem.getAddToCartUrl()));
             startActivity(webIntent);
+        }
+        if (v == mSaveItemButton) {
+            DatabaseReference itemRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_ITEMS);
+            itemRef.push().setValue(mItem);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }
