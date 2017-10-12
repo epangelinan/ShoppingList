@@ -25,48 +25,15 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
- //   private SharedPreferences mSharedPreferences;
- //   private SharedPreferences.Editor mEditor;
-
-    private DatabaseReference mSearchedItemReference;
-    private ValueEventListener mSearchedItemReferenceListener;
-
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
-    @Bind(R.id.searchItemEditText) EditText mSearchItemEditText;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind(R.id.savedItemsButton) Button mSavedItemsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        mSearchedItemReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_ITEM); //pinpoint location node
-
-        mSearchedItemReferenceListener = mSearchedItemReference.addValueEventListener(new ValueEventListener() { //attach listener
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
-                for (DataSnapshot searchItemSnapshot : dataSnapshot.getChildren()) {
-                    String searchItem = searchItemSnapshot.getValue().toString();
-                    Log.d("Search items updated", "item: " + searchItem); //log
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
-
-            }
-        });
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-  //      mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-  //      mEditor = mSharedPreferences.edit();
 
         Typeface dancingScriptRegular = Typeface.createFromAsset(getAssets(), "fonts/dancingscriptregular.otf");
         mAppNameTextView.setTypeface(dancingScriptRegular);
@@ -78,16 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == mFindItemsButton) {
-            String searchItem = mSearchItemEditText.getText().toString();
-
-            saveSearchItemToFirebase(searchItem);
-
- //           if(!(searchItem).equals("")) {
- //               addToSharedPreferences(searchItem);
- //           }
-
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
-            intent.putExtra("searchItem", searchItem);
             startActivity(intent);
         }
         if (v == mSavedItemsButton) {
@@ -95,18 +53,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
     }
-
-    public void saveSearchItemToFirebase(String searchItem) {
-        mSearchedItemReference.push().setValue(searchItem);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedItemReference.removeEventListener(mSearchedItemReferenceListener);
-    }
-
-//    private void addToSharedPreferences(String searchItem) {
-//        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
-//    }
 }
