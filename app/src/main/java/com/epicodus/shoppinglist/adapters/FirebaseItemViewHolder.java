@@ -27,6 +27,8 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
+    public ImageView mItemImageView;
+
     View mView;
     Context mContext;
 
@@ -38,7 +40,7 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
     }
 
     public void bindItem(Item item) {
-        ImageView itemImageView = (ImageView) mView.findViewById(R.id.itemImageView);
+        mItemImageView = (ImageView) mView.findViewById(R.id.itemImageView);
         TextView itemNameTextView = (TextView) mView.findViewById(R.id.itemNameTextView);
         TextView offerTypeTextView = (TextView) mView.findViewById(R.id.offerTypeTextView);
         TextView salePriceTextView = (TextView) mView.findViewById(R.id.salePriceTextView);
@@ -47,7 +49,7 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
                 .load(item.getMediumImage())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
-                .into(itemImageView);
+                .into(mItemImageView);
 
         itemNameTextView.setText(item.getName());
         offerTypeTextView.setText(item.getOfferType());
