@@ -12,6 +12,7 @@ public class Item {
     private String stock;
     private String offerType;
     private String addToCartUrl;
+    private String index;
 
     public Item() {}
 
@@ -32,6 +33,7 @@ public class Item {
         this.stock = stock;
         this.offerType = offerType;
         this.addToCartUrl = addToCartUrl;
+        this.index = "not_specified";
     }
 
     public String getName() {
@@ -64,5 +66,13 @@ public class Item {
 
     public String getAddToCartUrl() {
         return addToCartUrl;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }

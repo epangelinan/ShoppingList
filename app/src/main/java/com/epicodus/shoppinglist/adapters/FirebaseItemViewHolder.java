@@ -23,20 +23,18 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseItemViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
-    public ImageView mItemImageView;
-
     View mView;
     Context mContext;
+    public ImageView mItemImageView;
 
     public FirebaseItemViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     public void bindItem(Item item) {
@@ -54,32 +52,5 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
         itemNameTextView.setText(item.getName());
         offerTypeTextView.setText(item.getOfferType());
         salePriceTextView.setText("$" + Double.toString(item.getSalePrice()));
-    }
-
-    @Override
-    public void onClick(View view) {
-        final ArrayList<Item> items = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ITEMS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    items.add(snapshot.getValue(Item.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, ItemDetailActivity.class);
-                intent.putExtra("position", itemPosition);
-                intent.putExtra("items", Parcels.wrap(items));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 }
