@@ -21,10 +21,10 @@ import com.google.firebase.database.Query;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SavedItemListActivity extends AppCompatActivity implements OnStartDragListener {
+public class SavedItemListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_items);
+        setContentView(R.layout.activity_saved_item_list);
     }
 }
