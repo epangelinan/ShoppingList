@@ -2,12 +2,18 @@ package com.epicodus.shoppinglist.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.epicodus.shoppinglist.Constants;
+import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.models.Item;
 import com.epicodus.shoppinglist.ui.ItemDetailActivity;
+import com.epicodus.shoppinglist.ui.ItemDetailFragment;
 import com.epicodus.shoppinglist.util.ItemTouchHelperAdapter;
 import com.epicodus.shoppinglist.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -28,6 +34,7 @@ public class FirebaseItemListAdapter extends FirebaseRecyclerAdapter<Item, Fireb
     private Context mContext;
     private ChildEventListener mChildEventListener;
     private ArrayList<Item> mItems = new ArrayList<>();
+    private int mOrientation;
 
     public FirebaseItemListAdapter(Class<Item> modelClass, int modelLayout,
                                          Class<FirebaseItemViewHolder> viewHolderClass,
@@ -64,12 +71,17 @@ public class FirebaseItemListAdapter extends FirebaseRecyclerAdapter<Item, Fireb
 
             }
         });
-
     }
 
     @Override
     protected void populateViewHolder(final FirebaseItemViewHolder viewHolder, Item model, int position) {
         viewHolder.bindItem(model);
+
+        mOrientation = viewHolder.itemView.getResources().getConfiguration().orientation;
+        if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            createDetailFragment(0);
+        }
+
         viewHolder.mItemImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -84,12 +96,28 @@ public class FirebaseItemListAdapter extends FirebaseRecyclerAdapter<Item, Fireb
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ItemDetailActivity.class);
-                intent.putExtra("position", viewHolder.getAdapterPosition());
-                intent.putExtra("items", Parcels.wrap(mItems));
-                mContext.startActivity(intent);
+                int itemPosition = viewHolder.getAdapterPosition();
+                if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    createDetailFragment(itemPosition);
+                } else {
+                    Intent intent = new Intent(mContext, ItemDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                    intent.putExtra(Constants.EXTRA_KEY_ITEMS, Parcels.wrap(mItems));
+                    mContext.startActivity(intent);
+                }
             }
         });
+    }
+
+    private void createDetailFragment(int position) {
+        // Creates new ItemDetailFragment with the given position:
+        ItemDetailFragment detailFragment = ItemDetailFragment.newInstance(mItems, position);
+        // Gathers necessary components to replace the FrameLayout in the layout with the ItemDetailFragment:
+        FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+        //  Replaces the FrameLayout with the ItemDetailFragment:
+        ft.replace(R.id.itemDetailContainer, detailFragment);
+        // Commits these changes:
+        ft.commit();
     }
 
     @Override

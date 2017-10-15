@@ -21,6 +21,8 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -42,11 +44,16 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.addToCartTextView) TextView mAddToCartLabel;
 
     private Item mItem;
+    private ArrayList<Item> mItems;
+    private int mPosition;
 
-    public static ItemDetailFragment newInstance(Item item) {
+    public static ItemDetailFragment newInstance(ArrayList<Item> items, Integer position) {
         ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("item", Parcels.wrap(item));
+
+        args.putParcelable(Constants.EXTRA_KEY_ITEMS, Parcels.wrap(items));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
+
         itemDetailFragment.setArguments(args);
         return itemDetailFragment;
     }
@@ -54,7 +61,9 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mItem = Parcels.unwrap(getArguments().getParcelable("item"));
+        mItems = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_ITEMS));
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        mItem = mItems.get(mPosition);
     }
 
     @Override

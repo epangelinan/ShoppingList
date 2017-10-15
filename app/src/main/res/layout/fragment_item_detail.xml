@@ -21,10 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:paddingBottom="20dp"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="20dp">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/itemNameTextView"
@@ -46,8 +46,7 @@
                 android:layout_below="@+id/itemNameTextView"
                 android:text="ONLINE_ONLY"
                 android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/salePriceTextView"
@@ -71,8 +70,7 @@
                 android:gravity="center"
                 android:text="Stock status"
                 android:textColor="@color/colorTextIcons"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -89,7 +87,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:paddingTop="20dp">
+                android:paddingTop="10dp">
 
                 <TextView
                     android:id="@+id/addToCartTextView"
@@ -120,13 +118,12 @@
                     android:id="@+id/shortDescriptionTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="1dp"
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="Product Description"
                     android:textColor="@color/colorTextIcons"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
