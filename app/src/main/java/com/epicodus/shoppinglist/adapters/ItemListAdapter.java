@@ -17,6 +17,7 @@ import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.models.Item;
 import com.epicodus.shoppinglist.ui.ItemDetailActivity;
 import com.epicodus.shoppinglist.ui.ItemDetailFragment;
+import com.epicodus.shoppinglist.util.OnItemSelectedListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -32,16 +33,18 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
     private ArrayList<Item> mItems = new ArrayList<>();
     private Context mContext;
+    private OnItemSelectedListener mOnItemSelectedListener;
 
-    public ItemListAdapter(Context context, ArrayList<Item> items) {
+    public ItemListAdapter(Context context, ArrayList<Item> items, OnItemSelectedListener itemSelectedListener) {
         mContext = context;
         mItems = items;
+        mOnItemSelectedListener = itemSelectedListener;
     }
 
     @Override
     public ItemListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_item, parent, false);
-        ItemViewHolder viewHolder = new ItemViewHolder(view);
+        ItemViewHolder viewHolder = new ItemViewHolder(view, mItems, mOnItemSelectedListener);
         return viewHolder;
     }
 
@@ -65,18 +68,19 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
         private Context mContext;
         private int mOrientation;
+        private ArrayList<Item> mItems = new ArrayList<>();
+        private OnItemSelectedListener mItemSelectedListener;
 
-        public ItemViewHolder(View itemView) {
+        public ItemViewHolder(View itemView, ArrayList<Item> items, OnItemSelectedListener itemSelectedListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
             mContext = itemView.getContext();
-
-
-            // Determines the current orientation of the device:
             mOrientation = itemView.getResources().getConfiguration().orientation;
 
-            // Checks if the recorded orientation matches Android's landscape configuration.
-            // if so, we create a new DetailFragment to display in our special landscape layout:
+            mItems = items;
+            mItemSelectedListener = itemSelectedListener;
+
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(0);
             }
@@ -110,6 +114,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
+            mItemSelectedListener.onItemSelected(itemPosition, mItems);
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(itemPosition);
             } else {

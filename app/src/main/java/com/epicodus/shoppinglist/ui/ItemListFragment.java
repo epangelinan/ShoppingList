@@ -1,6 +1,7 @@
 package com.epicodus.shoppinglist.ui;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.adapters.ItemListAdapter;
 import com.epicodus.shoppinglist.models.Item;
 import com.epicodus.shoppinglist.services.WalmartService;
+import com.epicodus.shoppinglist.util.OnItemSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +44,17 @@ public class ItemListFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
+    private OnItemSelectedListener mOnItemSelectedListener;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnItemSelectedListener = (OnItemSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
 
     public ItemListFragment() {
         // Required empty public constructor
@@ -128,7 +140,7 @@ public class ItemListFragment extends Fragment {
 
                     @Override
                     public void run() {
-                        mAdapter = new ItemListAdapter(getActivity(), mItems);
+                        mAdapter = new ItemListAdapter(getActivity(), mItems, mOnItemSelectedListener);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                         mRecyclerView.setLayoutManager(layoutManager);
