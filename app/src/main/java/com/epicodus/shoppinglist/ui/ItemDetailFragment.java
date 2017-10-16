@@ -33,6 +33,11 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
 
+    private Item mItem;
+    private ArrayList<Item> mItems;
+    private int mPosition;
+    private String mSource;
+
     @Bind(R.id.itemImageView) ImageView mItemImageLabel;
     @Bind(R.id.itemNameTextView) TextView mItemNameLabel;
     @Bind(R.id.offerTypeTextView) TextView mOfferTypeLabel;
@@ -43,16 +48,15 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.saveItemButton) TextView mSaveItemButton;
     @Bind(R.id.addToCartTextView) TextView mAddToCartLabel;
 
-    private Item mItem;
-    private ArrayList<Item> mItems;
-    private int mPosition;
 
-    public static ItemDetailFragment newInstance(ArrayList<Item> items, Integer position) {
+
+    public static ItemDetailFragment newInstance(ArrayList<Item> items, Integer position, String source) {
         ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
         Bundle args = new Bundle();
 
         args.putParcelable(Constants.EXTRA_KEY_ITEMS, Parcels.wrap(items));
         args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        args.putString(Constants.KEY_SOURCE, source);
 
         itemDetailFragment.setArguments(args);
         return itemDetailFragment;
@@ -64,12 +68,21 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
         mItems = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_ITEMS));
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mItem = mItems.get(mPosition);
+        mSource = getArguments().getString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         ButterKnife.bind(this, view);
+
+        if (mSource.equals(Constants.SOURCE_SAVED)) {
+            mSaveItemButton.setVisibility(View.GONE);
+        } else {
+            // This line of code should already exist. Make sure it now resides in this conditional:
+            mSaveItemButton.setOnClickListener(this);
+        }
 
         Picasso.with(view.getContext())
                 .load(mItem.getMediumImage())
@@ -83,9 +96,7 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
         mStockLabel.setText(mItem.getStock());
         mItemIdLabel.setText("Item ID:" + mItem.getItemId());
         mShortDescriptionLabel.setText(mItem.getShortDescription());
-
         mAddToCartLabel.setOnClickListener(this);
-        mSaveItemButton.setOnClickListener(this);
 
         return view;
     }

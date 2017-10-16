@@ -11,15 +11,17 @@ import java.util.ArrayList;
 
 public class ItemPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Item> mItems;
+    private String mSource;
 
-    public ItemPagerAdapter(FragmentManager fm, ArrayList<Item> items) {
+    public ItemPagerAdapter(FragmentManager fm, ArrayList<Item> items, String source) {
         super(fm);
         mItems = items;
+        mSource = source;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ItemDetailFragment.newInstance(mItems, position);
+        return ItemDetailFragment.newInstance(mItems, position, mSource);
     }
 
     @Override

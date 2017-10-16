@@ -37,6 +37,7 @@ public class ItemListActivity extends AppCompatActivity implements OnItemSelecte
 
     private Integer mPosition;
     ArrayList<Item> mItems;
+    private String mSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +49,13 @@ public class ItemListActivity extends AppCompatActivity implements OnItemSelecte
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 mPosition = savedInstanceState.getInt(Constants.EXTRA_KEY_POSITION);
                 mItems = Parcels.unwrap(savedInstanceState.getParcelable(Constants.EXTRA_KEY_ITEMS));
+                mSource = savedInstanceState.getString(Constants.KEY_SOURCE);
 
                 if (mPosition != null && mItems != null) {
                     Intent intent = new Intent(this, ItemDetailActivity.class);
                     intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
                     intent.putExtra(Constants.EXTRA_KEY_ITEMS, Parcels.wrap(mItems));
+                    intent.putExtra(Constants.KEY_SOURCE, mSource);
                     startActivity(intent);
                 }
             }
@@ -66,12 +69,14 @@ public class ItemListActivity extends AppCompatActivity implements OnItemSelecte
         if (mPosition != null && mItems != null) {
             outState.putInt(Constants.EXTRA_KEY_POSITION, mPosition);
             outState.putParcelable(Constants.EXTRA_KEY_ITEMS, Parcels.wrap(mItems));
+            outState.putString(Constants.KEY_SOURCE, mSource);
         }
     }
 
     @Override
-    public void onItemSelected(Integer position, ArrayList<Item> items) {
+    public void onItemSelected(Integer position, ArrayList<Item> items, String source) {
         mPosition = position;
         mItems = items;
+        mSource = source;
     }
 }

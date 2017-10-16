@@ -20,6 +20,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Bind(R.id.viewPager) ViewPager mViewPager;
     private ItemPagerAdapter adapterViewPager;
     ArrayList<Item> mItems = new ArrayList<>();
+    private String mSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         mItems = Parcels.unwrap(getIntent().getParcelableExtra(Constants.EXTRA_KEY_ITEMS));
         int startingPosition = getIntent().getIntExtra(Constants.EXTRA_KEY_POSITION, 0);
+        mSource = getIntent().getStringExtra(Constants.KEY_SOURCE);
 
-        adapterViewPager = new ItemPagerAdapter(getSupportFragmentManager(), mItems);
+        adapterViewPager = new ItemPagerAdapter(getSupportFragmentManager(), mItems, mSource);
         mViewPager.setAdapter(adapterViewPager);
         mViewPager.setCurrentItem(startingPosition);
     }
