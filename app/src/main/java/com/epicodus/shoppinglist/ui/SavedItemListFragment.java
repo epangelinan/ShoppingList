@@ -27,13 +27,12 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class SavedItemListFragment extends Fragment implements OnStartDragListener {
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+
     private FirebaseItemListAdapter mFirebaseAdapter;
     private ItemTouchHelper mItemTouchHelper;
 
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-
     public SavedItemListFragment() {
-        // Required empty public constructor
     }
 
     @Override

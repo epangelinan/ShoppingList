@@ -31,8 +31,8 @@ import java.util.Collections;
 public class FirebaseItemListAdapter extends FirebaseRecyclerAdapter<Item, FirebaseItemViewHolder> implements ItemTouchHelperAdapter {
     private DatabaseReference mRef;
     private OnStartDragListener mOnStartDragListener;
-    private Context mContext;
     private ChildEventListener mChildEventListener;
+    private Context mContext;
     private ArrayList<Item> mItems = new ArrayList<>();
     private int mOrientation;
 

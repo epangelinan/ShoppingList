@@ -77,7 +77,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
             mContext = itemView.getContext();
             mOrientation = itemView.getResources().getConfiguration().orientation;
-
             mItems = items;
             mItemSelectedListener = itemSelectedListener;
 
@@ -99,7 +98,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             mOfferTypeTextView.setText(item.getOfferType());
         }
 
-        // Takes position of item in list as parameter:
         private void createDetailFragment(int position) {
             ItemDetailFragment detailFragment = ItemDetailFragment.newInstance(mItems, position, Constants.SOURCE_FIND);
             FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();

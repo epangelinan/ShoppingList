@@ -33,11 +33,6 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
 
-    private Item mItem;
-    private ArrayList<Item> mItems;
-    private int mPosition;
-    private String mSource;
-
     @Bind(R.id.itemImageView) ImageView mItemImageLabel;
     @Bind(R.id.itemNameTextView) TextView mItemNameLabel;
     @Bind(R.id.offerTypeTextView) TextView mOfferTypeLabel;
@@ -47,6 +42,11 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.shortDescriptionTextView) TextView mShortDescriptionLabel;
     @Bind(R.id.saveItemButton) TextView mSaveItemButton;
     @Bind(R.id.addToCartTextView) TextView mAddToCartLabel;
+
+    private Item mItem;
+    private ArrayList<Item> mItems;
+    private int mPosition;
+    private String mSource;
 
 
 
@@ -80,7 +80,6 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             mSaveItemButton.setVisibility(View.GONE);
         } else {
-            // This line of code should already exist. Make sure it now resides in this conditional:
             mSaveItemButton.setOnClickListener(this);
         }
 

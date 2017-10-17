@@ -37,7 +37,7 @@ public class ItemListActivity extends AppCompatActivity implements OnItemSelecte
 
     private Integer mPosition;
     ArrayList<Item> mItems;
-    private String mSource;
+    String mSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

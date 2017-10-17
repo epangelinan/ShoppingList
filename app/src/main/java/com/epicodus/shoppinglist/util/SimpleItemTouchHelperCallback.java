@@ -62,4 +62,6 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback  {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
         mAdapter.onItemDismiss(viewHolder.getAdapterPosition());
     }
+
+
 }

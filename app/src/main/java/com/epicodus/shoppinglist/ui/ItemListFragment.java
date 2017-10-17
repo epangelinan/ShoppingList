@@ -46,18 +46,7 @@ public class ItemListFragment extends Fragment {
     private String mRecentAddress;
     private OnItemSelectedListener mOnItemSelectedListener;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mOnItemSelectedListener = (OnItemSelectedListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + e.getMessage());
-        }
-    }
-
     public ItemListFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -67,8 +56,17 @@ public class ItemListFragment extends Fragment {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mEditor = mSharedPreferences.edit();
 
-        // Instructs fragment to include menu options:
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnItemSelectedListener = (OnItemSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
     }
 
 
@@ -117,11 +115,6 @@ public class ItemListFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void addToSharedPreferences(String searchItem) {
-        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
-    }
-
     public void getItems(String searchItem) {
         final WalmartService walmartService = new WalmartService();
 
@@ -149,6 +142,10 @@ public class ItemListFragment extends Fragment {
                 });
             }
         });
+    }
+
+    private void addToSharedPreferences(String searchItem) {
+        mEditor.putString(Constants.PREFERENCES_SEARCH_ITEM_KEY, searchItem).apply();
     }
 
 }
