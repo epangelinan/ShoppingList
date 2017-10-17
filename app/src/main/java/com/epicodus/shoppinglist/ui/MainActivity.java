@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == mFindStoresButton) {
             String location = mLocationEditText.getText().toString();
-            Log.d(TAG, location);
+//            Log.d(TAG, location);
             Intent intent = new Intent(MainActivity.this, StoresActivity.class);
+            intent.putExtra("location", location);
             startActivity(intent);
         }
     }
