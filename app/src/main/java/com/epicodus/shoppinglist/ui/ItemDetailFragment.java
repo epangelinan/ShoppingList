@@ -91,7 +91,7 @@ public class ItemDetailFragment extends Fragment implements View.OnClickListener
 
         mItemNameLabel.setText(mItem.getName());
         mOfferTypeLabel.setText(mItem.getOfferType());
-        mSalePriceLabel.setText("$" + Double.toString(mItem.getSalePrice()));
+        mSalePriceLabel.setText("$" + Double.toString(mItem.getSalePrice()).format("%.2f", mItem.getSalePrice()));
         mStockLabel.setText(mItem.getStock());
         mItemIdLabel.setText("Item ID:" + mItem.getItemId());
         mShortDescriptionLabel.setText(mItem.getShortDescription());

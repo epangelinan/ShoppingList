@@ -51,6 +51,6 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder {
 
         itemNameTextView.setText(item.getName());
         offerTypeTextView.setText(item.getOfferType());
-        salePriceTextView.setText("$" + Double.toString(item.getSalePrice()));
+        salePriceTextView.setText("$" + Double.toString(item.getSalePrice()).format("%.2f", item.getSalePrice()));
     }
 }

@@ -94,7 +94,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
                     .into(mItemImageView);
 
             mItemNameTextView.setText(item.getName());
-            mSalePriceTextView.setText("$" + Double.toString(item.getSalePrice()));
+            mSalePriceTextView.setText("$" + Double.toString(item.getSalePrice()).format("%.2f", item.getSalePrice()));
             mOfferTypeTextView.setText(item.getOfferType());
         }
 
