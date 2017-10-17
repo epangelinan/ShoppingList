@@ -10,9 +10,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class StoresActivity extends AppCompatActivity {
-    private TextView mLocationTextView;
-    private ListView mListView;
+    @Bind(R.id.locationTextView) TextView mLocationTextView;
+    @Bind(R.id.listView) ListView mListView;
     private String[] stores = new String[] {"Renton Walmart Supercenter", "Bellevue Walmart"};
 
 
@@ -21,8 +24,7 @@ public class StoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stores);
 
-        mListView = (ListView) findViewById(R.id.listView);
-        mLocationTextView = (TextView) findViewById(R.id.locationTextView);
+        ButterKnife.bind(this);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stores);
         mListView.setAdapter(adapter);
