@@ -27,7 +27,8 @@
                 android:value="com.epicodus.shoppinglist.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.ItemDetailActivity" />
-        <activity android:name=".ui.SavedItemListActivity"></activity>
+        <activity android:name=".ui.SavedItemListActivity" />
+        <activity android:name=".StoresActivity"></activity>
     </application>
 
 </manifest>

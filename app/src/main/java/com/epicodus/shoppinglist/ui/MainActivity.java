@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.epicodus.shoppinglist.Constants;
 import com.epicodus.shoppinglist.R;
+import com.epicodus.shoppinglist.StoresActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.findItemsButton) Button mFindItemsButton;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind(R.id.savedItemsButton) Button mSavedItemsButton;
+    @Bind(R.id.findStoresButton) Button mFindStoresButton;
+
+    public static final String TAG = MainActivity.class.getSimpleName();
+    private EditText mLocationEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mFindItemsButton.setOnClickListener(this);
         mSavedItemsButton.setOnClickListener(this);
+        mFindStoresButton.setOnClickListener(this);
+        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
+
     }
 
     @Override
@@ -50,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == mSavedItemsButton) {
             Intent intent = new Intent(MainActivity.this, SavedItemListActivity.class);
+            startActivity(intent);
+        }
+        if (v == mFindStoresButton) {
+            String location = mLocationEditText.getText().toString();
+            Log.d(TAG, location);
+            Intent intent = new Intent(MainActivity.this, StoresActivity.class);
             startActivity(intent);
         }
     }

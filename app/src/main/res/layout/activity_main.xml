@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/shoppinglist" />
+        android:src="@drawable/shoppinglist"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/findStoresButton" />
 
     <TextView
         android:id="@+id/appNameTextView"
@@ -25,6 +28,17 @@
         android:textSize="60sp"
         android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/locationEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/findItemsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:background="@android:color/white"
+        android:hint="Enter Zip Code"
+        android:padding="5dp" />
+
     <Button
         android:id="@+id/findItemsButton"
         android:layout_width="match_parent"
@@ -32,20 +46,30 @@
         android:background="@android:color/holo_orange_light"
         android:text="Find Item"
         android:textColor="@color/colorTextIcons"
-        android:layout_marginBottom="11dp"
-        android:layout_above="@+id/savedItemsButton"
+        android:layout_above="@+id/findStoresButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/findStoresButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/savedItemsButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_purple"
+        android:text="Find Store"
+        android:textColor="@color/colorTextIcons" />
 
     <Button
         android:id="@+id/savedItemsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:background="@color/colorPrimary"
         android:text="My Saved Items"
         android:textColor="@color/colorTextIcons"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
