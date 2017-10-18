@@ -30,33 +30,22 @@ public class StoresActivity extends AppCompatActivity {
 
     public ArrayList<Store> stores = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stores);
-
         ButterKnife.bind(this);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stores);
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String store = ((TextView)view).getText().toString();
-                Toast.makeText(StoresActivity.this, store, Toast.LENGTH_LONG).show();
-            }
-        });
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
+
         mLocationTextView.setText("Here are all the stores near: " + location);
         getStores(location);
     }
 
     private void getStores(String location) {
         final WalmartService walmartService = new WalmartService();
+
         walmartService.findStores(location, new Callback() {
 
             @Override
@@ -65,16 +54,33 @@ public class StoresActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, jsonData);
-                        stores = walmartService.processStoreResults(response);
+            public void onResponse(Call call, Response response) {
+                stores = walmartService.processStoreResults(response);
+
+                StoresActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        String[] storeNames = new String[stores.size()];
+                        for (int i = 0; i < storeNames.length; i++) {
+                            storeNames[i] = stores.get(i).getName();
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(StoresActivity.this,
+                                android.R.layout.simple_list_item_1, storeNames);
+                        mListView.setAdapter(adapter);
+
+                        for (Store store : stores) {
+                            Log.d(TAG, "name: " + store.getName());
+                            Log.d(TAG, "country: " + store.getCountry());
+                            Log.d(TAG, "streetAddress: " + store.getStreetAddress());
+                            Log.d(TAG, "city: " + store.getCity());
+                            Log.d(TAG, "stateProvCode: " + store.getStateProvCode());
+                            Log.d(TAG, "zip: " + store.getZip());
+                            Log.d(TAG, "phoneNumber: " + store.getPhoneNumber());
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                });
             }
         });
     }
