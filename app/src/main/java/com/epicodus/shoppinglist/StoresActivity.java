@@ -80,6 +80,7 @@ public class StoresActivity extends AppCompatActivity {
                             Log.d(TAG, "phoneNumber: " + store.getPhoneNumber());
                         }
                     }
+
                 });
             }
         });

@@ -125,24 +125,22 @@ public class WalmartService {
         try {
             String jsonData = response.body().string();
             if (response.isSuccessful()) {
-                JSONObject walmartJSON = new JSONObject(jsonData);
-                JSONArray itemsJSON = walmartJSON.getJSONArray("stores");
-                for (int i = 0; i < itemsJSON.length(); i++) {
-                    JSONObject itemJSON = itemsJSON.getJSONObject(i);
+                JSONArray storesJSON = new JSONArray(jsonData);
+                for (int i = 0; i < storesJSON.length(); i++) {
 
-                    String name = itemJSON.getString("name");
+                    String name = storesJSON.getJSONObject(i).getString("name");
 
-                    String country = itemJSON.getString("country");
+                    String country = storesJSON.getJSONObject(i).getString("country");
 
-                    String streetAddress = itemJSON.getString("streetAddress");
+                    String streetAddress = storesJSON.getJSONObject(i).getString("streetAddress");
 
-                    String city = itemJSON.getString("city");
+                    String city = storesJSON.getJSONObject(i).getString("city");
 
-                    String stateProvCode = itemJSON.getString("stateProvCode");
+                    String stateProvCode = storesJSON.getJSONObject(i).getString("stateProvCode");
 
-                    String zip = itemJSON.getString("zip");
+                    String zip = storesJSON.getJSONObject(i).getString("zip");
 
-                    String phoneNumber = itemJSON.getString("phoneNumber");
+                    String phoneNumber = storesJSON.getJSONObject(i).getString("phoneNumber");
 
 
                     Store store = new Store(name, country, streetAddress, city, stateProvCode, zip, phoneNumber);
