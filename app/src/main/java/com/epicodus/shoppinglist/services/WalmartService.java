@@ -5,6 +5,7 @@ import android.util.Log;
 
 
 import com.epicodus.shoppinglist.Constants;
+import com.epicodus.shoppinglist.Store;
 import com.epicodus.shoppinglist.models.Item;
 
 import org.json.JSONArray;
@@ -116,5 +117,43 @@ public class WalmartService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
+    }
+
+    public ArrayList<Store> processStoreResults(Response response) {
+        ArrayList<Store> stores = new ArrayList<>();
+
+        try {
+            String jsonData = response.body().string();
+            if (response.isSuccessful()) {
+                JSONObject walmartJSON = new JSONObject(jsonData);
+                JSONArray itemsJSON = walmartJSON.getJSONArray("stores");
+                for (int i = 0; i < itemsJSON.length(); i++) {
+                    JSONObject itemJSON = itemsJSON.getJSONObject(i);
+
+                    String name = itemJSON.getString("name");
+
+                    String country = itemJSON.getString("country");
+
+                    String streetAddress = itemJSON.getString("streetAddress");
+
+                    String city = itemJSON.getString("city");
+
+                    String stateProvCode = itemJSON.getString("stateProvCode");
+
+                    String zip = itemJSON.getString("zip");
+
+                    String phoneNumber = itemJSON.getString("phoneNumber");
+
+
+                    Store store = new Store(name, country, streetAddress, city, stateProvCode, zip, phoneNumber);
+                    stores.add(store);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return stores;
     }
 }

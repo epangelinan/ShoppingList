@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.epicodus.shoppinglist.services.WalmartService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +27,8 @@ public class StoresActivity extends AppCompatActivity {
 
     @Bind(R.id.locationTextView) TextView mLocationTextView;
     @Bind(R.id.listView) ListView mListView;
-    private String[] stores = new String[] {"Renton Walmart Supercenter", "Bellevue Walmart"};
+
+    public ArrayList<Store> stores = new ArrayList<>();
 
 
     @Override
@@ -66,7 +68,10 @@ public class StoresActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if (response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        stores = walmartService.processStoreResults(response);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
