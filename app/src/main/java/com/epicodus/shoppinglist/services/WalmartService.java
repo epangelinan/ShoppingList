@@ -5,7 +5,7 @@ import android.util.Log;
 
 
 import com.epicodus.shoppinglist.Constants;
-import com.epicodus.shoppinglist.Store;
+import com.epicodus.shoppinglist.models.Store;
 import com.epicodus.shoppinglist.models.Item;
 
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package com.epicodus.shoppinglist;
+package com.epicodus.shoppinglist.models;
 
 public class Store {
     private String name;
