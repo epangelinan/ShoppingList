@@ -28,7 +28,7 @@ public class WalmartService {
                 .build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WALMART_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter("query", searchItem);
+        urlBuilder.addQueryParameter(Constants.WALMART_ITEM_QUERY_PARAMETER, searchItem);
         urlBuilder.addQueryParameter(Constants.WALMART_FORMAT_KEY, Constants.WALMART_FORMAT_VALUE);
         urlBuilder.addQueryParameter("apiKey", Constants.WALMART_API_KEY);
 
@@ -94,5 +94,27 @@ public class WalmartService {
             e.printStackTrace();
         }
         return items;
+    }
+
+    public static void findStores(String location, Callback callback) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WALMART_BASE_URL_STORE).newBuilder();
+        urlBuilder.addQueryParameter(Constants.WALMART_FORMAT_KEY, Constants.WALMART_FORMAT_VALUE);
+        urlBuilder.addQueryParameter(Constants.WALMART_STORE_ZIP_PARAMETER, location);
+        urlBuilder.addQueryParameter("apiKey", Constants.WALMART_API_KEY);
+
+        String url = urlBuilder.build().toString();
+
+        Log.v("The URL is: ", url);
+        //Example:  http://api.walmartlabs.com/v1/stores?format=json&zip=98057&apiKey=qv9ccdh494tzypuurayrdgwg
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
     }
 }
