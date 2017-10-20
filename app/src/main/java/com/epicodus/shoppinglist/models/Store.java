@@ -1,5 +1,8 @@
 package com.epicodus.shoppinglist.models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Store {
     private String name;
     private String country;
@@ -10,6 +13,9 @@ public class Store {
     private String phoneNumber;
     private double latitude;
     private double longitude;
+    private String address;
+
+    public Store() {}
 
     public Store(String name, String country, String streetAddress, String city, String stateProvCode, String zip, String phoneNumber, double latitude, double longitude) {
         this.name = name;
@@ -21,6 +27,7 @@ public class Store {
         this.phoneNumber = phoneNumber;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = streetAddress + ", " + city + ", " + stateProvCode + " " + zip;
     }
 
     public String getName() {
@@ -58,4 +65,6 @@ public class Store {
     public double getLongitude() {
         return longitude;
     }
+
+    public String getAddress() { return address; }
 }

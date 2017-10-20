@@ -60,30 +60,6 @@
                 android:layout_toRightOf="@+id/stateProvCodeTextView"
                 android:text="Zip Code" />
 
-            <TextView
-                android:id="@+id/latitudeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/zipTextView"
-                android:layout_toRightOf="@+id/zipTextView"
-                android:text="Latitude" />
-
-            <TextView
-                android:id="@+id/longitudeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/latitudeTextView"
-                android:layout_toRightOf="@+id/latitudeTextView"
-                android:text="longitude" />
-
-
-
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

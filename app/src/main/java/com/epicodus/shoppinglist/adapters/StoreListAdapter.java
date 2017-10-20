@@ -1,6 +1,7 @@
 package com.epicodus.shoppinglist.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.TextView;
 
 import com.epicodus.shoppinglist.R;
 import com.epicodus.shoppinglist.models.Store;
+import com.epicodus.shoppinglist.ui.StoreDetailActivity;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -41,14 +45,13 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.Stor
         return mStores.size();
     }
 
-    public class StoreViewHolder extends RecyclerView.ViewHolder {
+    public class StoreViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.storeNameTextView) TextView mStoreNameTextView;
         @Bind(R.id.streetAddressTextView) TextView mStreetAddressTextView;
         @Bind(R.id.cityTextView) TextView mCityTextView;
         @Bind(R.id.stateProvCodeTextView) TextView mStateProvCodeTextView;
         @Bind(R.id.zipTextView) TextView mZipTextView;
-        @Bind(R.id.latitudeTextView) TextView mLatitudeTextView;
-        @Bind(R.id.longitudeTextView) TextView mLongitudeTextView;
+
 
         private Context mContext;
 
@@ -56,6 +59,16 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.Stor
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, StoreDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("stores", Parcels.wrap(mStores));
+            mContext.startActivity(intent);
         }
 
         public void bindStore(Store store) {
@@ -64,8 +77,6 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.Stor
             mCityTextView.setText(store.getCity());
             mStateProvCodeTextView.setText(store.getStateProvCode());
             mZipTextView.setText(store.getZip());
-            mLatitudeTextView.setText(Double.toString(store.getLatitude()));
-            mLongitudeTextView.setText(Double.toString(store.getLongitude()));
         }
     }
 }
