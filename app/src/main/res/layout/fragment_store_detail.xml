@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@android:color/holo_purple">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,15 +20,14 @@
             android:paddingBottom="20dp">
 
             <TextView
+                android:id="@+id/storeNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store Name"
-                android:id="@+id/storeNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:text="Store Name"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -56,9 +55,8 @@
                     android:drawableLeft="@drawable/ic_local_phone_white_24dp"
                     android:drawablePadding="4dp"
                     android:textColor="@color/colorTextIcons"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
+                    android:textSize="17sp"
+                    android:layout_marginBottom="15dp"
                     android:gravity="center"/>
 
                 <TextView
@@ -69,8 +67,7 @@
                     android:drawablePadding="4dp"
                     android:id="@+id/addressTextView"
                     android:textColor="@color/colorTextIcons"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:textSize="17sp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"/>
 
