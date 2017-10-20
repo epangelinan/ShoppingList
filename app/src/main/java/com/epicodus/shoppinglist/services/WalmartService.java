@@ -142,8 +142,11 @@ public class WalmartService {
 
                     String phoneNumber = storesJSON.getJSONObject(i).getString("phoneNumber");
 
+                    JSONArray coordinates = (JSONArray) storesJSON.getJSONObject(i).get("coordinates");
+                    double latitude = coordinates.getDouble(0);
+                    double longitude = coordinates.getDouble(1);
 
-                    Store store = new Store(name, country, streetAddress, city, stateProvCode, zip, phoneNumber);
+                    Store store = new Store(name, country, streetAddress, city, stateProvCode, zip, phoneNumber, latitude,longitude);
                     stores.add(store);
                 }
             }

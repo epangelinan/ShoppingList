@@ -28,7 +28,8 @@
         </activity>
         <activity android:name=".ui.ItemDetailActivity" />
         <activity android:name=".ui.SavedItemListActivity" />
-        <activity android:name=".ui.StoresActivity"></activity>
+        <activity android:name=".ui.StoreListActivity" />
+        <activity android:name=".ui.StoreDetailActivity"></activity>
     </application>
 
 </manifest>

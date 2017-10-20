@@ -8,8 +8,10 @@ public class Store {
     private String stateProvCode;
     private String zip;
     private String phoneNumber;
+    private double latitude;
+    private double longitude;
 
-    public Store(String name, String country, String streetAddress, String city, String stateProvCode, String zip, String phoneNumber) {
+    public Store(String name, String country, String streetAddress, String city, String stateProvCode, String zip, String phoneNumber, double latitude, double longitude) {
         this.name = name;
         this.country = country;
         this.streetAddress = streetAddress;
@@ -17,6 +19,8 @@ public class Store {
         this.stateProvCode = stateProvCode;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -45,5 +49,13 @@ public class Store {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }
