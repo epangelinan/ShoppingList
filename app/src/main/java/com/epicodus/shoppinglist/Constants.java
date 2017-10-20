@@ -12,6 +12,7 @@ public class Constants {
     public static final String WALMART_STORE_ZIP_PARAMETER = "zip";
 
     public static final String PREFERENCES_SEARCH_ITEM_KEY ="searchItem";
+
     public static final String FIREBASE_CHILD_SEARCHED_ITEM = "searchedItem";
     public static final String FIREBASE_CHILD_ITEMS = "items";
     public static final String FIREBASE_QUERY_INDEX = "index";
