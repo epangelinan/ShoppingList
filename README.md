@@ -4,13 +4,13 @@
 
 ## Description
 
-_An Android shopping app that utilizes the Walmart API.  The user can search for their desired store items, purchase them online, and/or save them to their shopping list.  The user can also search for the address of their store, call the store, and view its location using Google Maps._
+_An Android shopping app that utilizes the Walmart API.  The user can search for their desired store items, save them to their shopping list, and purchase them online.  The user can also search for the address of their store, call the store and view its location using Google Maps._
 
 ## Specifications
 
 |Behavior |Input|Output|
 |---|---|---|
-|User can search for an item.|From the welcome screen, user taps on the "FIND ITEM" button.  The Item List screen appears with a search field at the top.  User enters an item into the search field.|A scrollable list of matching items appears.  Each item is displayed with a picture of the item, the item's name, sale price, and either "ONLINE_ONLY" or "ONLINE_AND_STORE".|
+|User can search for an item.|From the welcome screen, user taps on the "FIND ITEM" button.  The Item List screen appears with a search field at the top.  User enters an item into the search field.|A scrollable list of matching items appears in the Item List screen.  Each item is displayed with a picture of the item, the item's name, sale price, and either "ONLINE_ONLY" or "ONLINE_AND_STORE".|
 |User can view the details of an item.|From the Item List screen, user taps on one of the items.|The Item Detail screen appears, displaying the picture of the item, the item's name, sale price, "ONLINE_ONLY" or "ONLINE_AND_STORE", "Available" or "Not available", Add to Cart component, Item ID number, and item description.  A "SAVE ITEM" button appears at the bottom of the screen.|
 |User can purchase an item online if it is available.|From the Item Detail screen, with the item shown as "Available", user taps on "Add to Cart".  If a default browser has not been set on the device, a screen of available browsers is shown.  User selects a browser and taps OK button.|A Walmart Check Out webpage is displayed containing the selected item, other items that were also selected via "Add to Cart", and the total price of all the items.  User completes their purchase after tapping on the "Check Out" button in the webpage and following the online instructions.|
 |User cannot purchase an item online if it is not available.|From the Item Detail screen, with the item shown as "Not available", user taps on "Add to Cart".  If a default browser has not been set on the device, a screen of available browsers is shown.  User selects a browser and taps OK button.|A Walmart webpage is displayed with a message indicating the item cannot be added to the cart and the reason why, e.g. Item is out of stock.|
