@@ -33,7 +33,7 @@ _An Android shopping app that utilizes the Walmart API.  The user can search for
 
 ## Known Bugs
 
-_After rotating the device from the Saved Items List screen, the saved item and its item detail sometimes does not match._
+_After device rotation from the Saved Items List screen, the saved item and its item detail sometimes does not match (works fine on emulator)._
 
 ## Support and contact details
 
@@ -41,7 +41,7 @@ _If you have any questions or suggestions, please contact Esvethlynna at esveth@
 
 ## Technologies Used
 
-_Android Studio, Java, Firebase, Walmart API, and GitHub._
+_Android Studio v2.3.2, Java, Firebase, Walmart API, and GitHub._
 
 ### License
 
